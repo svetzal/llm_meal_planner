@@ -16,8 +16,8 @@ def main():
             cookware=["pot", "pan", "baking tray", "baking dish", "frying pan", "saucepan"]
         )),
         food_preferences=(FoodPreferences(
-            favourite_foods=["pizza", "chocolate", "ice cream", "chicken", "pasta"],
-            disliked_foods=["mushrooms", "onions", "tomatoes", "peppers", "olives"]
+            likes=["pizza", "chocolate", "ice cream", "chicken", "pasta"],
+            dislikes=["mushrooms", "onions", "tomatoes", "peppers", "olives"]
         ))
     )
 
