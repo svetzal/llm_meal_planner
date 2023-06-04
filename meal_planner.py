@@ -9,7 +9,7 @@ class MealPlanner:
         self.household = household
         self.llm = llm
 
-    def plan(self, days):
+    def plan_days(self, days):
         prompt = """You are an expert meal planner who really cares about people's happiness, health and nutrition. 
         You never include foods to your household has allergies, and you try to limit the amount of foods they 
         dislike. You also try to include their favourite foods as much as possible. The house only has a limited 

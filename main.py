@@ -23,7 +23,7 @@ def main():
 
     llm = ChatOpenAI(temperature=0.7, model_name="gpt-4")
 
-    response = MealPlanner(household, llm).plan(7)
+    response = MealPlanner(household, llm).plan_days(7)
 
     print(response)
 
