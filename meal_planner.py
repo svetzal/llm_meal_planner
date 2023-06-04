@@ -8,17 +8,15 @@ class MealPlanner:
     def __init__(self, household, llm):
         self.household = household
         self.llm = llm
-
-    def plan_days(self, days):
         prompt = """
-        
+
 You are an expert meal planner who really cares about people's happiness, health and nutrition. You never include 
 foods to your household has allergies, and you try to limit the amount of foods they dislike. You also try to include 
 their favourite foods as much as possible. The house only has a limited number of appliances and cookware, 
 so you need to make sure that you don't plan meals that require different appliances or cookware than you have. Try 
 to re-use ingredients between meals and snacks as much as possible to reduce waste. Meals should decrease in calories 
 throughout the day.
-        
+
 Food Allergies (never include food that will trigger these): {allergies}
 Available appliances: {available_appliances}    
 Available cookware: {available_cookware}
@@ -30,9 +28,9 @@ Respond in the following format:
 
 Create a meal plan for a household of {family_size} that includes breakfast, lunch, dinner, and snacks for {days} days.
 
-"""
+    """
 
-        parser = PydanticOutputParser(pydantic_object=MealPlan)
+        self.parser = PydanticOutputParser(pydantic_object=MealPlan)
         task = PromptTemplate(
             input_variables=["days"],
             template=prompt.strip(),
@@ -46,9 +44,11 @@ Create a meal plan for a household of {family_size} that includes breakfast, lun
                 "format_instructions": parser.get_format_instructions(),
             }
         )
-        chain = LLMChain(llm=self.llm, prompt=task, verbose=True)
-        response = chain.run(
-            output_parser=parser,
+        self.chain = LLMChain(llm=self.llm, prompt=task, verbose=True)
+
+    def plan_days(self, days):
+        response = self.chain.run(
+            output_parser=self.parser,
             days=days,
         )
         return response
