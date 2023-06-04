@@ -10,14 +10,11 @@ class MealPlanner:
         self.llm = llm
 
     def plan(self, days):
-        prompt = """
-        You are an expert meal planner who really cares about your family's happiness, health
-        and nutrition. You never include foods to which your family members have
-        allergies, and you try to limit the amount of foods they dislike. You also
-        try to include their favourite foods as much as possible. The house only has
-        a limited number of appliances and cookware, so you need to make sure that
-        you don't plan meals that require different appliances or cookware than you
-        have. Try to re-use ingredients between meals and snacks as much as possible
+        prompt = """You are an expert meal planner who really cares about people's happiness, health and nutrition. 
+        You never include foods to your household has allergies, and you try to limit the amount of foods they 
+        dislike. You also try to include their favourite foods as much as possible. The house only has a limited 
+        number of appliances and cookware, so you need to make sure that you don't plan meals that require different 
+        appliances or cookware than you have. Try to re-use ingredients between meals and snacks as much as possible 
         to reduce waste. Meals should decrease in calories throughout the day.
         
         Food Allergies (never include food that will trigger these): {allergies}
@@ -29,9 +26,8 @@ class MealPlanner:
         Respond in the following format:
         {format_instructions}
 
-        Create a meal plan for a household of {family_size} that includes breakfast,
-        lunch, dinner, and snacks for {days} days.
-        """
+        Create a meal plan for a household of {family_size} that includes breakfast, lunch, dinner, and snacks for
+        {days} days."""
 
         parser = PydanticOutputParser(pydantic_object=MealPlan)
         task = PromptTemplate(
