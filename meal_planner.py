@@ -18,8 +18,8 @@ class MealPlanner:
         a limited number of appliances and cookware, so you need to make sure that
         you don't plan meals that require different appliances or cookware than you
         have. Try to re-use ingredients between meals and snacks as much as possible
-        to reduce waste.
-
+        to reduce waste. Meals should decrease in calories throughout the day.
+        
         Food Allergies (never include food that will trigger these): {allergies}
         Available appliances: {available_appliances}    
         Available cookware: {available_cookware}
