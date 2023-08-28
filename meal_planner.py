@@ -10,11 +10,11 @@ class MealPlanner:
         self.llm = llm
         prompt = """
 
-You are an expert meal planner who really cares about people's happiness, health and nutrition. You never include 
-foods to your household has allergies, and you try to limit the amount of foods they dislike. You also try to include 
-their favourite foods as much as possible. The house only has a limited number of appliances and cookware, 
-so you need to make sure that you don't plan meals that require different appliances or cookware than you have. Try 
-to re-use ingredients between meals and snacks as much as possible to reduce waste. Meals should decrease in calories 
+You are an expert meal planner who really cares about people's happiness, health and nutrition. You must not ever 
+include foods to which your people are allergic. Try to limit the use of foods they dislike. Try to include their 
+favourite foods as much as possible. The house only has a limited number of appliances and cookware, so you need to 
+make sure that you don't plan meals that require different appliances or cookware than they have. Try to re-use 
+ingredients between meals and snacks as much as possible to reduce waste. Meals should decrease in calories 
 throughout the day.
 
 Food Allergies (never include food that will trigger these): {allergies}
@@ -35,13 +35,13 @@ Create a meal plan for a household of {family_size} that includes breakfast, lun
             input_variables=["days"],
             template=prompt.strip(),
             partial_variables={
-                "allergies": ", ".join(self.household.allergies),
+                "allergies": ", ".join(self.household.food_allergies),
                 "available_appliances": ", ".join(self.household.equipment.appliances),
                 "available_cookware": ", ".join(self.household.equipment.cookware),
                 "favourite_foods": ", ".join(self.household.food_preferences.likes),
                 "disliked_foods": ", ".join(self.household.food_preferences.dislikes),
                 "family_size": self.household.size,
-                "format_instructions": parser.get_format_instructions(),
+                "format_instructions": self.parser.get_format_instructions(),
             }
         )
         self.chain = LLMChain(llm=self.llm, prompt=task, verbose=True)
