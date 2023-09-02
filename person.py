@@ -10,7 +10,8 @@ class Person(BaseModel):
     email: str = Field(default_factory=str, description="The person's email")
     phone: str = Field(default_factory=str, description="The person's cell phone number")
     allergies: list[Allergy] = Field(default_factory=list, description="A list of allergies")
-    food_preferences: FoodPreferences = Field(default_factory=FoodPreferences, description="The person's food preferences")
+    food_preferences: FoodPreferences = Field(default_factory=FoodPreferences,
+                                              description="The person's food preferences")
 
     @property
     def food_allergies(self):
